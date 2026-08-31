@@ -207,3 +207,43 @@ License
 
 This guide and example code are shared under the MIT License. 
 The MATLAB MCP Server itself is subject to the MathWorks Software License Agreement.
+
+## RoadRunner driving test bench
+
+The ACC model is also integrated with a generated `drivingTestBench`, camera
+and radar sensing, 3DOF vehicle dynamics, and the RoadRunner scenario
+`ACC_LeadBrake_Test.rrscenario`. See
+[DrivingTestProject/DrivingTest/ACC_ROADRUNNER.md](DrivingTestProject/DrivingTest/ACC_ROADRUNNER.md)
+for the architecture, portable RoadRunner project, one-command test, and
+verified results. The repository bundle can be refreshed with:
+
+```matlab
+manifest = packageACCRoadRunnerProject;
+```
+
+To run the complete test after cloning the repository:
+
+```matlab
+repoRoot = pwd;
+project = openProject(fullfile(repoRoot, ...
+    "DrivingTestProject", "DrivingTest", "DrivingTest.prj"));
+rrProjectFile = fullfile(project.RootFolder, ...
+    "RoadRunnerProject", "Project", "Project.rrproj");
+rrProjectFolder = fileparts(fileparts(rrProjectFile));
+
+rrApp = roadrunner(ProjectFolder=rrProjectFolder);
+results = runACCLeadBrakeTest(rrApp, rrProjectFile);
+```
+
+`runACCLeadBrakeTest` accepts either the RoadRunner project folder or
+`Project.rrproj`. Omitting that argument uses the project currently open in
+`rrApp`.
+
+Before pushing, stage the generated MATLAB project and portable RoadRunner
+bundle. Generated simulation caches are excluded by `.gitignore`.
+
+```powershell
+git add .gitattributes .gitignore README.md DrivingTestProject
+git commit -m "Add reproducible RoadRunner ACC test bench"
+git push
+```

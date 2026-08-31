@@ -1,0 +1,11 @@
+# Binary model and RoadRunner artifacts
+*.slx binary
+*.sldd binary
+*.rrscene binary
+*.rrscenario binary
+*.rrmeta binary
+*.fbx binary
+*.fbx_rrx binary
+*.png binary
+*.jpg binary
+*.jpeg binary

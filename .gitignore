@@ -1,0 +1,11 @@
+# MATLAB and Simulink generated artifacts
+/DrivingTestProject/DrivingTest/Work/
+**/slprj/
+**/codegen/
+*.slxc
+*.mex*
+*.autosave
+
+# RoadRunner generated output
+**/Exports/
+/video_Closed_Loop_TestBench.mp4
